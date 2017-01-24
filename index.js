@@ -31,7 +31,7 @@ function jwt (options) {
         .catch(e => {
           const msg = 'Invalid token' + (opts.debug
             ? ' - ' + e.message
-            : '') + '\n'
+            : '')
           throw new Error(msg)
         })
         .then(next)
