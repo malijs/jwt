@@ -22,7 +22,7 @@ function jwt (options) {
         throw new Error('Invalid secret')
       }
 
-      return JWT.verifyAsync(token, secret, opts)
+      return JWT.verify(token, secret, opts)
         .then(isRevoked(ctx, token))
         .then(user => {
           set(ctx, opts.key, user)
