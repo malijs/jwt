@@ -12,4 +12,10 @@ message TestRequest {
 
 message TestReply {
   string message = 1;
+  User user = 2;
+}
+
+message User {
+  string foo = 1;
+  int32 iat = 2;
 }

@@ -34,6 +34,7 @@
     "babel-eslint": "^7.1.1",
     "grpc-caller": "^0.1.2",
     "jsdoc-to-markdown": "^2.0.1",
+    "jsonwebtoken": "^7.2.1",
     "mali": "^0.1.0",
     "md-wrap-code": "^0.1.1",
     "standard": "^8.6.0"

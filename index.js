@@ -7,7 +7,6 @@ const set = require('lodash.set')
 function jwt (options) {
   const opts = options || {}
   opts.key = opts.key || 'user'
-  opts.tokenKey = opts.tokenKey || 'token'
   opts.secretPath = opts.secretPath || 'secret'
 
   const identity = user => user
@@ -37,7 +36,9 @@ function jwt (options) {
       .then(isRevoked(ctx, token))
       .then(user => {
         set(ctx, opts.key, user)
-        set(ctx, opts.tokenKey, token)
+        if (opts.tokenKey) {
+          set(ctx, opts.tokenKey, token)
+        }
       })
       .catch(e => {
         const msg = 'Invalid token' + (opts.debug
