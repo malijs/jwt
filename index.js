@@ -27,7 +27,12 @@ function jwt (options) {
   }
 
   function jwtAction (token, ctx, next) {
-    const secret = get(ctx, opts.secretPath, opts.secret)
+    let secret = ''
+    if (opts.secretPath) {
+      secret = get(ctx, opts.secretPath, opts.secret)
+    } else {
+      secret = opts.secret
+    }
     if (!secret) {
       throw new Error('Invalid secret')
     }
@@ -36,8 +41,8 @@ function jwt (options) {
       .then(isRevoked(ctx, token))
       .then(user => {
         set(ctx, opts.key, user)
-        if (opts.tokenKey) {
-          set(ctx, opts.tokenKey, token)
+        if (opts.tokenPath) {
+          set(ctx, opts.tokenPath, token)
         }
       })
       .catch(e => {

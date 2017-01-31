@@ -399,7 +399,7 @@ test('should work if secret is provided by middleware', async t => {
   await app.close()
 })
 
-test('should not overwrite ctx.token on successful token verification if opts.tokenKey is undefined', async t => {
+test('should not overwrite ctx.token on successful token verification if opts.tokenPath is undefined', async t => {
   const secret = 'shhhhhh'
   const token = jwt.sign({foo: 'bar'}, secret)
 
@@ -429,17 +429,43 @@ test('should not overwrite ctx.token on successful token verification if opts.to
   await app.close()
 })
 
-test('should populate the raw token to ctx.token, in key from opts.tokenKey', async t => {
+test('should populate the raw token to ctx.token, and decoded data into ctx.user', async t => {
   const secret = 'shhhhhh'
   const token = jwt.sign({foo: 'bar'}, secret)
 
   t.plan(4)
   const host = getHostport()
   const app = new Mali(PROTO_PATH, 'Tester')
-  app.use(malijwt({ secret: secret, key: 'jwtdata', tokenKey: 'testTokenKey' }))
+  app.use(malijwt({ secret: secret }))
   app.use('testCall', ctx => {
     ctx.res = {
-      message: ctx.testTokenKey,
+      message: ctx.token || '',
+      user: ctx.user
+    }
+  })
+  app.start(host)
+
+  const client = caller(host, PROTO_PATH, 'Tester')
+  const meta = { Authorization: 'Bearer ' + token }
+  const response = await client.testCall({ message: 'hello' }, meta)
+  t.is(response.message, '')
+  t.truthy(response.user)
+  t.is(response.user.foo, 'bar')
+  t.truthy(response.user.iat)
+  await app.close()
+})
+
+test('should populate the raw token to ctx.token, in key from opts.tokenPath', async t => {
+  const secret = 'shhhhhh'
+  const token = jwt.sign({foo: 'bar'}, secret)
+
+  t.plan(4)
+  const host = getHostport()
+  const app = new Mali(PROTO_PATH, 'Tester')
+  app.use(malijwt({ secret: secret, key: 'jwtdata', tokenPath: 'testtokenPath' }))
+  app.use('testCall', ctx => {
+    ctx.res = {
+      message: ctx.testtokenPath,
       user: ctx.jwtdata
     }
   })
@@ -455,17 +481,17 @@ test('should populate the raw token to ctx.token, in key from opts.tokenKey', as
   await app.close()
 })
 
-test('should populate the raw token to ctx, in nested key from opts.tokenKey', async t => {
+test('should populate the raw token to ctx, in nested key from opts.tokenPath', async t => {
   const secret = 'shhhhhh'
   const token = jwt.sign({foo: 'bar'}, secret)
 
   t.plan(4)
   const host = getHostport()
   const app = new Mali(PROTO_PATH, 'Tester')
-  app.use(malijwt({ secret: secret, key: 'state.jwtdata', tokenKey: 'state.testTokenKey' }))
+  app.use(malijwt({ secret: secret, key: 'state.jwtdata', tokenPath: 'state.testtokenPath' }))
   app.use('testCall', ctx => {
     ctx.res = {
-      message: ctx.state.testTokenKey,
+      message: ctx.state.testtokenPath,
       user: ctx.state.jwtdata
     }
   })
