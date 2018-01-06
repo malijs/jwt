@@ -25,14 +25,12 @@
     "jwt"
   ],
   "scripts": {
-    "test": "ava -v",
-    "docs": "jsdoc2md index.js --heading-depth 3 --template readme.hbs > README.md"
+    "test": "ava -v"
   },
   "devDependencies": {
     "ava": "^0.24.0",
     "grpc": "^1.8.0",
     "grpc-caller": "^0.3.0",
-    "jsdoc-to-markdown": "^3.0.0",
     "mali": "^0.6.0",
     "standard": "^10.0.0"
   },
