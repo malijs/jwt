@@ -1,11 +1,10 @@
 # mali-jwt
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/malijs/jwt.svg)](https://greenkeeper.io/)
-
 Mali JWT authentication middleware.
 
 [![npm version](https://img.shields.io/npm/v/mali-jwt.svg?style=flat-square)](https://www.npmjs.com/package/mali-jwt)
 [![build status](https://img.shields.io/travis/malijs/jwt/master.svg?style=flat-square)](https://travis-ci.org/malijs/jwt)
+[![Greenkeeper badge](https://badges.greenkeeper.io/malijs/jwt.svg)](https://greenkeeper.io/)
 
 [https://github.com/malijs/mali](Mali) middleware that validates JSON Web Tokens and sets `ctx.user`
 (by default) if a valid token is provided.

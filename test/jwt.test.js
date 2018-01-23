@@ -33,7 +33,7 @@ test('should fail if no authorization metadata', async t => {
 
   const client = caller(host, PROTO_PATH, 'Tester')
   const error = await t.throws(client.testCall({ message: 'hello' }))
-  t.is(error.message, 'Not Authorized')
+  t.true(error.message.indexOf('Not Authorized') >= 0)
   await app.close()
 })
 
@@ -48,7 +48,7 @@ test('should fail if authorization metadata is malformed', async t => {
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'wrong' }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Not Authorized')
+  t.true(error.message.indexOf('Not Authorized') >= 0)
   await app.close()
 })
 
@@ -66,7 +66,7 @@ test('should allow provided getToken function to throw', async t => {
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'wrong' }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Bad Authorization')
+  t.true(error.message.indexOf('Bad Authorization') >= 0)
   await app.close()
 })
 
@@ -84,7 +84,7 @@ test('should throw if getToken function returns invalid jwt', async t => {
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'wrong' }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Invalid token')
+  t.true(error.message.indexOf('Invalid token') >= 0)
   await app.close()
 })
 
@@ -99,7 +99,7 @@ test('should fail if authorization metadata not well-formatted jwt', async t => 
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'Bearer wrongjwt' }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Invalid token')
+  t.true(error.message.indexOf('Invalid token') >= 0)
   await app.close()
 })
 
@@ -117,7 +117,7 @@ test('should throw if authorization metadata is not valid jwt', async t => {
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'Bearer ' + token }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Invalid token - invalid signature')
+  t.true(error.message.indexOf('Invalid token - invalid signature') >= 0)
   await app.close()
 })
 
@@ -139,7 +139,7 @@ test('should throw if audience is not expected', async t => {
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'Bearer ' + token }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Invalid token - jwt audience invalid. expected: not-expected-audience')
+  t.true(error.message.indexOf('Invalid token - jwt audience invalid. expected: not-expected-audience') >= 0)
   await app.close()
 })
 
@@ -157,7 +157,7 @@ test('should throw if token is expired', async t => {
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'Bearer ' + token }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Invalid token - jwt expired')
+  t.true(error.message.indexOf('Invalid token - jwt expired') >= 0)
   await app.close()
 })
 
@@ -175,7 +175,7 @@ test('should throw if token issuer is wrong', async t => {
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'Bearer ' + token }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Invalid token - jwt issuer invalid. expected: http://wrong')
+  t.true(error.message.indexOf('Invalid token - jwt issuer invalid. expected: http://wrong') >= 0)
   await app.close()
 })
 
@@ -193,7 +193,7 @@ test('should throw if secret neither provided by options or middleware', async t
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'Bearer ' + token }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Invalid secret')
+  t.true(error.message.indexOf('Invalid secret') >= 0)
   await app.close()
 })
 
@@ -211,7 +211,7 @@ test('should throw if secret both provided by options (right secret) and middlew
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'Bearer ' + token }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Invalid token - invalid signature')
+  t.true(error.message.indexOf('Invalid token - invalid signature') >= 0)
   await app.close()
 })
 
@@ -230,7 +230,7 @@ test('should throw if isRevoked throws error', async t => {
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'Bearer ' + token }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Invalid token - Revoked token')
+  t.true(error.message.indexOf('Invalid token - Revoked token') >= 0)
   await app.close()
 })
 
@@ -249,7 +249,7 @@ test('should throw if revoken token', async t => {
   const client = caller(host, PROTO_PATH, 'Tester')
   const meta = { Authorization: 'Bearer ' + token }
   const error = await t.throws(client.testCall({ message: 'hello' }, meta))
-  t.is(error.message, 'Invalid token - Revoked token')
+  t.true(error.message.indexOf('Invalid token - Revoked token') >= 0)
   await app.close()
 })
 
