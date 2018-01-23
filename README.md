@@ -1,5 +1,7 @@
 # mali-jwt
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/malijs/jwt.svg)](https://greenkeeper.io/)
+
 Mali JWT authentication middleware.
 
 [![npm version](https://img.shields.io/npm/v/mali-jwt.svg?style=flat-square)](https://www.npmjs.com/package/mali-jwt)
