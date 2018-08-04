@@ -29,10 +29,10 @@
   },
   "devDependencies": {
     "ava": "^0.25.0",
-    "greenkeeper-lockfile": "^1.13.0",
-    "grpc": "^1.8.0",
-    "grpc-caller": "^0.4.0",
-    "mali": "^0.7.0",
+    "greenkeeper-lockfile": "^1.15.1",
+    "grpc": "^1.13.1",
+    "grpc-caller": "^0.9.0",
+    "mali": "^0.9.0",
     "standard": "^11.0.0"
   },
   "ava": {
@@ -41,7 +41,7 @@
     ]
   },
   "dependencies": {
-    "jsonwebtoken": "^8.1.0",
+    "jsonwebtoken": "^8.3.0",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
     "mali-bearer": "^0.1.1",
