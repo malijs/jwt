@@ -45,6 +45,6 @@
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
     "mali-bearer": "^0.1.1",
-    "pify": "^3.0.0"
+    "pify": "^4.0.0"
   }
 }
