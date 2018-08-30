@@ -33,7 +33,7 @@
     "grpc": "^1.13.1",
     "grpc-caller": "^0.9.0",
     "mali": "^0.9.0",
-    "standard": "^11.0.0"
+    "standard": "^12.0.1"
   },
   "ava": {
     "files": [
