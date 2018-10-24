@@ -32,7 +32,7 @@
     "greenkeeper-lockfile": "^1.15.1",
     "grpc": "^1.13.1",
     "grpc-caller": "^0.9.0",
-    "mali": "^0.9.0",
+    "mali": "^0.10.0",
     "standard": "^11.0.0"
   },
   "ava": {
