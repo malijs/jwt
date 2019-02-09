@@ -1,4 +1,4 @@
-const bearer = require('mali-bearer')
+const bearer = require('@malijs/bearer')
 const pify = require('pify')
 const JWT = pify(require('jsonwebtoken'))
 const get = require('lodash.get')
