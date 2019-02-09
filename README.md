@@ -5,7 +5,7 @@ Mali JWT authentication middleware.
 [![npm version](https://img.shields.io/npm/v/@malijs/jwt.svg?style=flat-square)](https://www.npmjs.com/package/@malijs/jwt)
 [![build status](https://img.shields.io/travis/malijs/jwt/master.svg?style=flat-square)](https://travis-ci.org/malijs/jwt)
 
-[https://github.com/malijs/mali](Mali) middleware that validates JSON Web Tokens and sets `ctx.user`
+[Mali](https://github.com/malijs/mali) middleware that validates JSON Web Tokens and sets `ctx.user`
 (by default) if a valid token is provided.
 
 ## Install
