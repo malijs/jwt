@@ -1,6 +1,6 @@
 {
   "name": "@malijs/jwt",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Mali JWT authentication middleware",
   "main": "index.js",
   "repository": {
