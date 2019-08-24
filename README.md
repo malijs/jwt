@@ -111,7 +111,7 @@ app.use(jwt({
 // Protected middleware
 app.use(function(ctx, next) {
   console.log(ctx.state.user) // the decoded JSON data
-  console.log(ctx..state.token) // the token
+  console.log(ctx.state.token) // the token
   return next()
 })
 ```
