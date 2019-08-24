@@ -28,11 +28,11 @@
     "test": "ava -v"
   },
   "devDependencies": {
-    "ava": "^1.2.0",
-    "grpc": "^1.18.0",
-    "grpc-caller": "^0.11.0",
-    "mali": "^0.11.0",
-    "standard": "^12.0.0"
+    "ava": "^2.3.0",
+    "grpc": "^1.23.3",
+    "grpc-caller": "^0.13.0",
+    "mali": "^0.18.0",
+    "standard": "^14.0.0"
   },
   "ava": {
     "files": [
@@ -41,10 +41,10 @@
   },
   "dependencies": {
     "@malijs/bearer": "^0.2.0",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^8.5.1",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
-    "pify": "^3.0.0"
+    "pify": "^4.0.0"
   },
   "publishConfig": {
     "access": "public"
