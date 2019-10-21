@@ -67,9 +67,9 @@ the token is revoked. The provided function should match the following interface
 ## Options
 
 * `key` - the path to set decoded JSON object into `ctx`. Default: `user`.
-* `secretPath` - the path within `ctx` to look for the secret. If not present at path uses `opts.secret`. Default: `secret`.
+* `secretPath` - the path within `ctx` to look for the secret. If not present at path uses `opts.secret`. Default: `secret`. If the resulting value in the property is a function, it will be evaluated. Supports async functions.
 * `isRevoked` - Async function for checking if token is revoked.
-* `getToken` - Optional function for getting token.
+* `getToken` - Optional function for getting token. Can be async.
 * `tokenPath` - Optional path for to place token within `ctx`.
 
 ## Example

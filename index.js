@@ -1,5 +1,6 @@
 const bearer = require('@malijs/bearer')
 const pify = require('pify')
+const { decode } = require('jsonwebtoken')
 const JWT = pify(require('jsonwebtoken'))
 const get = require('lodash.get')
 const set = require('lodash.set')
@@ -14,9 +15,9 @@ function jwt (options) {
     ? (ctx, token) => user => opts.isRevoked(ctx, user, token).then(revocationHandler(user))
     : () => identity
 
-  return function jwtMiddleware (ctx, next) {
+  return async function jwtMiddleware (ctx, next) {
     if (typeof opts.getToken === 'function') {
-      const token = opts.getToken(ctx)
+      const token = await opts.getToken(ctx)
       if (token) {
         return jwtAction(token, ctx, next)
       }
@@ -26,7 +27,7 @@ function jwt (options) {
     return bearerAction(ctx, next)
   }
 
-  function jwtAction (token, ctx, next) {
+  async function jwtAction (token, ctx, next) {
     let secret = ''
     if (opts.secretPath) {
       secret = get(ctx, opts.secretPath, opts.secret)
@@ -35,6 +36,10 @@ function jwt (options) {
     }
     if (!secret) {
       throw new Error('Invalid secret')
+    }
+
+    if (typeof secret === 'function') {
+      secret = await getSecret(secret, token)
     }
 
     return JWT.verify(token, secret, opts)
@@ -59,6 +64,16 @@ function revocationHandler (user) {
   return revoked => revoked
     ? Promise.reject(new Error('Revoked token'))
     : Promise.resolve(user)
+}
+
+async function getSecret (provider, token) {
+  const decoded = decode(token, { complete: true })
+
+  if (!decoded || !decoded.header) {
+    throw new Error('Invalid token')
+  }
+
+  return provider(decoded.header, decoded.payload)
 }
 
 module.exports = jwt

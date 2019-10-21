@@ -28,11 +28,11 @@
     "test": "ava -v"
   },
   "devDependencies": {
-    "ava": "^2.3.0",
-    "grpc": "^1.23.3",
+    "ava": "^2.4.0",
+    "grpc": "^1.24.0",
     "grpc-caller": "^0.13.0",
-    "mali": "^0.18.0",
-    "standard": "^14.0.0"
+    "mali": "^0.19.0",
+    "standard": "^14.3.1"
   },
   "ava": {
     "files": [
